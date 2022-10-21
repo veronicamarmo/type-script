@@ -1,61 +1,3 @@
-// class Pacote {
-//     nome: string
-//     descricao: string
-//     data: Date
-//     status: boolean
-//     id: string
-
-//     constructor(_nome: string, _descricao: string, _data: Date, _status: boolean, _id: string) {
-//         this.nome = _nome
-//         this.descricao = _descricao
-//         this.data = _data
-//         this.status = _status
-//         this.id = _id
-//     }
-// }
-
-// let pacotes: Array<Pacote> = []
-
-// fetch('https://62361b7feb166c26eb2f488a.mockapi.io/pacotes', {
-//     method: 'GET',
-//     headers: { 'Contente-Type': "application/json" }
-// })
-//     .then(response => response.json())
-//     .then(result => {
-//         console.log(result);
-
-//         for (let index = 0; index < result.length; index++) {
-//             pacotes[index] = new Pacote(result[index].nome, result[index].descricao, new Date(result[index].data), result[index].status, result[index].id)
-
-//         }
-//         console.log(pacotes)
-//         listar()
-//     })
-
-// const cadastrar = () => {
-//     listar()
-// }
-
-// //! -----> Garanto que não vai ser nulo
-// //as -------> converte pra o tipo que eu quiser
-
-// let div = document.getElementById("lista_pacotes") as HTMLElement
-
-// // listar
-// //Gera HTML pros pacotes
-// const listar = () => {
-
-//     div.innerHTML = "";
-//     //map, foreach
-//     for (let index = 0; index < pacotes.length; index++) {
-//         // ? -----> esse elemento pode ser nulo
-//         // ++
-//         //Alt + Z
-//         div.innerHTML += `<div class="pacote"><h3>${pacotes[index].nome}</h3><p>${pacotes[index].descricao}</p><br><br><p>data da viagem:${pacotes[index].data}</P><br><br><div><button> class="limpar">excluir</button></div></div>`;
-//     }
-// }
-
-// let 
 
 // fetch
 class Informacao {
@@ -94,24 +36,24 @@ fetch('https://62361b7feb166c26eb2f488a.mockapi.io/pacotes', {
     })
 
 
-let botao = document.getElementById("botaocadastrar") as HTMLButtonElement;
+let botao = document.getElementById("botao") as HTMLButtonElement;
 
 // cadastrar
 
 
-let data = document.getElementById("datadaviagem") as HTMLInputElement;
+let datax: any = document.getElementById("datadaviagem") as HTMLInputElement;
 let pacote = document.getElementById("pacote") as HTMLInputElement;
-let descricao = document.getElementById("descricao") as HTMLInputElement;
+let descricao_input = document.getElementById("descricao") as HTMLInputElement;
 
 
 
 const cadastrar = () => {
 
-    let datav: string = data.value;
+    let datav: string = datax.value;
     let pacotex: string = pacote.value;
-    let descricao2: string = descricao.value;
+    let descricao2: string = descricao_input.value;
 
-    let cadastro: Informacao = new Informacao(pacotex, descricao2, new Date(datav), true, guardarinformacao.length+1)
+    let cadastro: Informacao = new Informacao(pacotex, descricao2, new Date(datav), true, guardarinformacao.length + 1)
 
     guardarinformacao.push(cadastro)
     lista()
@@ -126,22 +68,39 @@ const lista = () => {
         div.innerHTML += `
    <div class= "pacoteX"><h3>${guardarinformacao[index].nome}</h3><br><br><p class="descricao2">${guardarinformacao[index].descricao}</p> <p class="datav">data da viagem:${guardarinformacao[index].data} </p>
    <br><br>
-   <div class="botoes"> <button class="botao_editar">editar</button><button class="botao_excluir">excluir</button> </div> </div>
-   
-   `
+   <div class="botoes"> <button onclick='editar("${guardarinformacao[index].nome}","${guardarinformacao[index].descricao}","${guardarinformacao[index].data}","${guardarinformacao[index].status}","${guardarinformacao[index].id}")' class="botao_editar">editar</button><button onclick="excluir()"class="botao_excluir">excluir</button> </div> </div> `
     }
 }
 
 // editar
 
 
+let pegarId: number
 
+const editar = (nome: string, descricao: string, data: Date, status: boolean, id: number) => {
+
+    console.log(nome, descricao, data, status, id);
+
+    pacote.value = nome
+    descricao_input.value = descricao
+    datax.value = data
+    pegarId = id
+
+    botao.innerHTML = "<button class= 'editar' onclick='editar2()'>Editar</button>"
+
+}
+
+const editar2 = () => {
+    let editado = new Informacao(pacote.value, descricao_input.value, new Date(datax.value), false, pegarId)
+    guardarinformacao.splice(pegarId - 1, 1, editado)
+    lista()
+    botao.innerHTML = "<button onclick='cadastrar()' type='subimit' id='botaocadastrar' class='botaoc'>Cadastrar</button>"
+}
+
+//excluir
 
 const excluir = (index: number) => {
     //slice - remover
     guardarinformacao.splice(index, 1)
     lista()
 }
-
-
-

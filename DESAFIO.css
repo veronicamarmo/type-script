@@ -87,7 +87,8 @@ header {
     Height: 161px;
 }
 
-.h2 {
+h2 {
+
     font-family: 'Inter';
     font-style: normal;
     line-height: 48px;
@@ -330,4 +331,22 @@ footer {
     display: flex;
     justify-content: center;
     margin-top: 60px;
+}
+
+
+.editar {
+    padding: 10px 16px;
+
+    width: 109px;
+    height: 39px;
+
+    background: #8458FF;
+    border-radius: 4px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    color: white;
 }

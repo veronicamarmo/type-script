@@ -350,3 +350,22 @@ footer {
     flex-grow: 0;
     color: white;
 }
+
+
+.botaoc {
+    align-items: center;
+    width: 109px;
+    height: 39px;
+    border-color: #8458FF;
+    color: #fff;
+    box-shadow: 0 0 40px 40px #8458FF inset, 0 0 0 0 #8458FF;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+    color: black;
+    border-radius: 4px;
+    flex: none;
+}
+
+.botaoc:hover {
+    box-shadow: 0 0 10px 0 black inset, 0 0 10px 4px black;
+}
